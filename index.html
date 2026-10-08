@@ -40,6 +40,8 @@ body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--body);-
 .bars i.done b{width:100%}
 .top{display:flex;justify-content:space-between;align-items:center;max-width:1100px;width:100%;margin:10px auto 0;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mist)}
 .top .count{font-variant-numeric:tabular-nums;color:var(--leaf)}
+.topr{display:flex;align-items:center;gap:12px}
+#yt{position:fixed;left:0;bottom:0;width:200px;height:113px;opacity:0;pointer-events:none;z-index:-1}
 .iconbtn{background:none;border:1px solid rgba(255,255,255,.3);color:var(--paper);border-radius:999px;padding:6px 12px;font:inherit;font-size:11px;letter-spacing:.16em;cursor:pointer}
 .iconbtn:focus-visible,.btn:focus-visible,.nav button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 
@@ -115,7 +117,8 @@ h1 em{display:block;font-weight:500;color:var(--leaf)}
 <div class="bg"><div class="sharp"></div><div class="blur"></div></div>
 <div class="app">
   <div class="bars" id="bars"></div>
-  <div class="top"><span>Hai năm bên nhau</span><span class="count" id="count"></span></div>
+  <div class="top"><span>Hai năm bên nhau</span><span class="topr"><button type="button" class="iconbtn" id="music" aria-pressed="false">♪ Bật nhạc</button><span class="count" id="count"></span></span></div>
+  <div id="yt" aria-hidden="true"></div>
   <div class="stage" id="stage">
     <section class="slide cover" data-kind="cover">
       <div class="cover-text">
@@ -138,26 +141,26 @@ h1 em{display:block;font-weight:500;color:var(--leaf)}
 <script>
 /* Bản nháp: đổi thứ tự bằng cách di chuyển các dòng, sửa chữ ở title / text / when. */
 const MEMORIES = [
-  {src:"img/m01.jpg", title:"Ngày hẹn hò đầu tiên", text:"Hôm ấy Thuỳ nhận lời anh. Một bó hoa nhỏ, một nụ cười thật xinh, và câu chuyện của hai đứa bắt đầu từ đây.", when:"20.10.2024"},
-  {src:"img/m02.jpg", title:"Những chuyến đưa đón", text:"Đón em đi học, đưa em đi dạy, rồi chở em đi ăn đêm sau mỗi buổi. Con đường quen thuộc ấy là quãng đường anh thương nhất.", when:"Mỗi tối sau giờ học, giờ dạy"},
-  {src:"img/v1.mp4", poster:"img/v1.jpg", video:true, title:"Hậu trường photobooth", text:"Đội mũ thỏ, chỉnh tóc, cười nghiêng ngả trước ống kính. Vài giây trước khi có dải ảnh chung của hai đứa.", when:"Photobooth"},
-  {src:"img/m03.jpg", title:"Dải ảnh photobooth", text:"Bốn kiểu ảnh, một trái tim vẽ tay và dòng chữ I love you. Tờ ảnh nhỏ mà giữ được cả một ngày vui.", when:"Photobooth"},
-  {src:"img/m04.jpg", title:"Giáng sinh đến sớm", text:"Chưa tới Noel mà hai đứa đã rủ nhau đi ăn mừng trước, vì ở bên em ngày nào cũng giống ngày lễ.", when:"Mùa Giáng sinh"},
-  {src:"img/m05.jpg", title:"No căng bụng", text:"Ăn xong no tròn mà vẫn không quên giơ tay chữ V. Vẫn là tối Giáng sinh sớm ấy.", when:"Mùa Giáng sinh"},
-  {src:"img/m06.jpg", title:"Nướng ngày đông", text:"Trời lạnh cóng, hai đứa ngồi sát bên bếp nướng. Ấm nhất vẫn là có vợ ngồi cạnh.", when:"Mùa đông"},
-  {src:"img/m07.jpg", title:"Vợ đón Giáng sinh", text:"Khăn len hồng, má hồng, và nụ cười làm anh quên cả trời rét.", when:"Giáng sinh"},
-  {src:"img/m08.jpg", title:"Hẹn hò mùa đông", text:"Áo ấm, ánh đèn vàng, và cô gái của anh ngồi đó, bình yên đến lạ.", when:"Mùa đông"},
-  {src:"img/m09.jpg", title:"Đưa vợ đi du xuân", text:"Lên đồ, lên xe, đưa vk đi chơi xuân. Mùa xuân đầu tiên có em bên cạnh.", when:"Mùa xuân"},
-  {src:"img/m10.jpg", title:"Đấm vợ (nhẹ thôi)", text:"Lại một buổi đi ăn nướng. Ai bảo không nghe lời anh, tạo dáng dằn mặt một chút cho vui.", when:"Đi ăn nướng"},
-  {src:"img/m11.jpg", title:"Hẹn hò cà phê", text:"Một góc quán nhỏ, em diện váy đen, anh nheo mắt làm trò. Buổi chiều hôm ấy trôi thật chậm.", when:"Quán cà phê"},
-  {src:"img/m12.jpg", title:"Khi vợ chán đời", text:"Vẫn buổi cà phê ấy, vợ quay sang tự chụp với gương mặt chán đời. Chán đời mà vẫn xinh.", when:"Quán cà phê"},
-  {src:"img/m13.jpg", title:"Deadline hành xong", text:"Chạy xong deadline, vợ ngủ một giấc thật đã. Tóc rối, mắt nhắm mắt mở, đúng là cô vợ mê ngủ của anh.", when:"Vừa ngủ dậy"},
-  {src:"img/m14.jpg", title:"Vợ điêuuu", text:"Ánh mắt lườm này anh thuộc lòng rồi. Điêu thế mà anh vẫn thương.", when:""},
-  {src:"img/m15.jpg", title:"Hunnnn", text:"Tạo dáng nhí nhố, chẳng cần lý do gì cả.", when:""},
-  {src:"img/v2.mp4", poster:"img/v2.jpg", video:true, title:"Vợ lại hăm ănnn", text:"Món vừa lên là mắt sáng rỡ. Nhìn vợ ăn ngon là anh vui rồi.", when:"Buổi đi ăn"},
-  {src:"img/m16.jpg", title:"Vẫn là buổi ăn ấy", text:"Vợ vừa ăn vừa lướt điện thoại, còn anh thì lén chụp lại.", when:"Buổi đi ăn"},
-  {src:"img/m18.jpg", title:"Nàng thơ của anh", text:"Một chiều nắng nhẹ, em tự chụp mà vẫn xinh như thế.", when:""},
-  {src:"img/m17.jpg", title:"Ngày vợ trưởng thành", text:"Áo cử nhân, bó hoa hồng và anh đứng cạnh. Anh tự hào về em lắm.", when:"Ngày tốt nghiệp"},
+  {src:"img/m01.jpg", title:"Ngày em gật đầu", text:"Hẹn hò lần đầu, anh cầm bó hoa mà tim đập như trống. May quá, em nhận lời.", when:"20.10.2024"},
+  {src:"img/m02.jpg", title:"Tài xế riêng của Thuỳ", text:"Sáng đưa đi học, chiều đón đi dạy, tối chở đi ăn đêm. Lương trả bằng nụ cười, anh thấy vẫn lời.", when:"Mỗi tối sau giờ học, giờ dạy"},
+  {src:"img/v1.mp4", poster:"img/v1.jpg", video:true, title:"Hậu trường photobooth", text:"Mũ thỏ đội lệch, tóc chỉnh mãi chưa xong, cười chưa dứt thì máy đã chụp.", when:"Photobooth"},
+  {src:"img/m03.jpg", title:"Thành phẩm", text:"Bốn kiểu ảnh, một trái tim vẽ tay. Kiểu nào anh cũng đứng nghiêm, kiểu nào em cũng xinh.", when:"Photobooth"},
+  {src:"img/m04.jpg", title:"Noel đến sớm", text:"Chưa tới Giáng sinh đã rủ nhau đi ăn. Lý do rất chính đáng: thèm.", when:"Mùa Giáng sinh"},
+  {src:"img/m05.jpg", title:"No rồi, chụp thôi", text:"Bụng đã no, tay vẫn kịp giơ chữ V. Vẫn là tối hôm ấy.", when:"Mùa Giáng sinh"},
+  {src:"img/m06.jpg", title:"Trời lạnh thì ăn nướng", text:"Ngoài trời rét căm, trong này có bếp than và có em. Vậy là đủ ấm.", when:"Mùa đông"},
+  {src:"img/m07.jpg", title:"Cô gái khăn hồng", text:"Quấn khăn kín mít đón Giáng sinh, chỉ chừa lại đôi mắt cười. Anh chụp vội kẻo em đổi ý.", when:"Giáng sinh"},
+  {src:"img/m08.jpg", title:"Hẹn hò mùa đông", text:"Đèn vàng, áo ấm, em cúi xuống điện thoại, anh tranh thủ chụp trộm.", when:"Mùa đông"},
+  {src:"img/m09.jpg", title:"Chở vợ đi du xuân", text:"Đầu năm làm việc quan trọng nhất: đưa vk đi chơi xuân.", when:"Mùa xuân"},
+  {src:"img/m10.jpg", title:"Dằn mặt nhẹ", text:"Lại đi ăn nướng. Ai bảo không nghe lời anh, giơ nắm đấm cho có lệ thôi.", when:"Đi ăn nướng"},
+  {src:"img/m11.jpg", title:"Hẹn cà phê", text:"Em diện váy đen, anh nheo mắt làm trò. Cà phê nguội lúc nào không hay.", when:"Quán cà phê"},
+  {src:"img/m12.jpg", title:"Khi vợ chán đời", text:"Vẫn quán ấy, em quay sang tự chụp với vẻ mặt chán đời. Chán đời mà vẫn xinh, khó hiểu thật.", when:"Quán cà phê"},
+  {src:"img/m13.jpg", title:"Deadline đi, giấc ngủ ở lại", text:"Chạy xong deadline là ngủ bù một mạch. Tóc rối, mắt lim dim, đúng chuẩn cô vợ mê ngủ.", when:"Vừa ngủ dậy"},
+  {src:"img/m14.jpg", title:"Vợ điêuuu", text:"Ánh mắt lườm này anh thuộc lòng rồi. Sợ thì có sợ, thương thì vẫn thương.", when:""},
+  {src:"img/m15.jpg", title:"Hunnnn", text:"Không cần lý do, cứ chụm đầu lại là có ảnh.", when:""},
+  {src:"img/v2.mp4", poster:"img/v2.jpg", video:true, title:"Vợ lại hăm ănnn", text:"Đồ ăn vừa lên là mắt sáng rỡ. Anh chỉ việc ngồi xem em ăn.", when:"Buổi đi ăn"},
+  {src:"img/m16.jpg", title:"Ăn xong lướt điện thoại", text:"Vẫn buổi ấy. Em lướt điện thoại, anh lén chụp, hoà cả làng.", when:"Buổi đi ăn"},
+  {src:"img/m18.jpg", title:"Một chiều nắng nhẹ", text:"Em tự chụp, anh chỉ việc lưu lại.", when:""},
+  {src:"img/m17.jpg", title:"Ngày vợ trưởng thành", text:"Áo cử nhân, bó hoa hồng, và anh đứng cạnh cười như thể mình mới là người tốt nghiệp. Tự hào về em.", when:"Ngày tốt nghiệp"},
 ];
 const PHOTO_MS = 6000;
 const EVENT = new Date("2026-10-20T19:00:00+07:00");
@@ -216,7 +219,7 @@ let cur = 0, playing = !reduce, t0 = 0, elapsed = 0, raf = 0;
 
 function show(i) {
   i = Math.max(0, Math.min(slides.length - 1, i));
-  slides[cur].querySelector("video")?.pause();
+  const pv = slides[cur].querySelector("video"); if (pv) { pv.pause(); pv.muted = true; if (ducked) duck(false); }
   slides[cur].classList.remove("on");
   cur = i;
   const s = slides[cur];
@@ -253,7 +256,35 @@ function setPlaying(on) {
   playing = on;
   playBtn.textContent = on ? "Tạm dừng" : "Phát tiếp";
 }
-document.getElementById("start").onclick = () => { setPlaying(true); show(1); };
+
+/* Nhạc nền: "Từ Ngày Em Đến" - Da LAB, phát qua YouTube */
+const SONG_IDS = ["Hs_oju8YQVM", "AmvA-XJF0j8", "aMccF9l4bTk"];
+const musicBtn = document.getElementById("music");
+let yt = null, ytReady = false, songIdx = 0, musicOn = false, ducked = false;
+window.onYouTubeIframeAPIReady = () => {
+  yt = new YT.Player("yt", {
+    width: 200, height: 113, videoId: SONG_IDS[0],
+    playerVars: {playsinline: 1, controls: 0, rel: 0},
+    events: {
+      onReady: () => { ytReady = true; yt.setVolume(70); if (musicOn) yt.playVideo(); },
+      onStateChange: e => { if (e.data === YT.PlayerState.ENDED) { yt.seekTo(0); yt.playVideo(); } },
+      onError: () => { if (++songIdx < SONG_IDS.length) yt.loadVideoById(SONG_IDS[songIdx]); else musicBtn.hidden = true; }
+    }
+  });
+};
+function setMusic(on) {
+  musicOn = on;
+  musicBtn.textContent = on ? "♪ Tắt nhạc" : "♪ Bật nhạc";
+  musicBtn.setAttribute("aria-pressed", on);
+  if (!ytReady) return;
+  if (on && !ducked) yt.playVideo(); else yt.pauseVideo();
+}
+function duck(on) {
+  ducked = on;
+  if (ytReady && musicOn) on ? yt.pauseVideo() : yt.playVideo();
+}
+musicBtn.onclick = () => setMusic(!musicOn);
+document.getElementById("start").onclick = () => { setMusic(true); setPlaying(true); show(1); };
 document.getElementById("next").onclick = () => show(cur + 1);
 document.getElementById("prev").onclick = () => show(cur - 1);
 playBtn.onclick = () => setPlaying(!playing);
@@ -264,7 +295,7 @@ document.addEventListener("keydown", e => {
 });
 stage.addEventListener("click", e => {
   const v = e.target.closest("video");
-  if (v) { v.muted = !v.muted; return; }
+  if (v) { v.muted = !v.muted; duck(!v.muted); return; }
   if (e.target.closest("button")) return;
   const s = slides[cur].dataset.kind;
   if (s === "cover" || s === "invite") return;
@@ -295,5 +326,6 @@ clock(); setInterval(clock, 1000);
 show(0);
 raf = requestAnimationFrame(tick);
 </script>
+<script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>
