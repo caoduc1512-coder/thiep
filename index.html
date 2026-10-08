@@ -84,6 +84,8 @@ h1 em{font-weight:500;color:var(--leaf)}
 .clock div{min-width:62px;text-align:center;border:1px solid rgba(255,255,255,.22);border-radius:6px;padding:8px 6px;background:rgba(12,14,11,.45)}
 .clock b{display:block;font-family:var(--display);font-size:26px;color:var(--gold);font-variant-numeric:tabular-nums}
 .clock span{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mist)}
+.maplink{color:var(--gold);text-decoration:none;font-weight:500}
+.maplink:hover{text-decoration:underline}
 .thanks{color:var(--leaf);font-weight:500;margin:0}
 .sign{font-family:var(--script);font-size:30px;color:var(--gold);margin:4px 0 0}
 
@@ -116,7 +118,7 @@ h1 em{font-weight:500;color:var(--leaf)}
   <div class="stage" id="stage">
     <section class="slide cover" data-kind="cover">
       <div class="cover-text">
-      <p class="to">Gửi người thương,</p>
+      <p class="to">Gửi vợ yêu, Lê Thuỳ</p>
       <h1>Hai năm <em>mình nắm tay nhau</em></h1>
       <div class="dates"><span>20.10.2024</span><span class="heart">♥</span><span>20.10.2026</span></div>
       <p class="lede">730 ngày đã qua, bấm xem lại từng kỉ niệm của chúng mình trước khi tới lời hẹn cuối cùng.</p>
@@ -135,26 +137,26 @@ h1 em{font-weight:500;color:var(--leaf)}
 <script>
 /* Bản nháp: đổi thứ tự bằng cách di chuyển các dòng, sửa chữ ở title / text / when. */
 const MEMORIES = [
-  {src:"img/m01.jpg", title:"Kỉ niệm đầu tiên", text:"Viết vài dòng về khoảnh khắc này.", when:"Ngày · Địa điểm"},
-  {src:"img/m02.jpg", title:"Tên kỉ niệm", text:"Viết vài dòng về khoảnh khắc này.", when:"Ngày · Địa điểm"},
-  {src:"img/m03.jpg", title:"Tên kỉ niệm", text:"Viết vài dòng về khoảnh khắc này.", when:"Ngày · Địa điểm"},
-  {src:"img/m04.jpg", title:"Tên kỉ niệm", text:"Viết vài dòng về khoảnh khắc này.", when:"Ngày · Địa điểm"},
-  {src:"img/m05.jpg", title:"Tên kỉ niệm", text:"Viết vài dòng về khoảnh khắc này.", when:"Ngày · Địa điểm"},
-  {src:"img/m06.jpg", title:"Tên kỉ niệm", text:"Viết vài dòng về khoảnh khắc này.", when:"Ngày · Địa điểm"},
-  {src:"img/v1.mp4", poster:"img/v1.jpg", video:true, title:"Tên kỉ niệm", text:"Viết vài dòng về khoảnh khắc này.", when:"Ngày · Địa điểm"},
-  {src:"img/m07.jpg", title:"Tên kỉ niệm", text:"Viết vài dòng về khoảnh khắc này.", when:"Ngày · Địa điểm"},
-  {src:"img/m08.jpg", title:"Tên kỉ niệm", text:"Viết vài dòng về khoảnh khắc này.", when:"Ngày · Địa điểm"},
-  {src:"img/m09.jpg", title:"Tên kỉ niệm", text:"Viết vài dòng về khoảnh khắc này.", when:"Ngày · Địa điểm"},
-  {src:"img/m10.jpg", title:"Tên kỉ niệm", text:"Viết vài dòng về khoảnh khắc này.", when:"Ngày · Địa điểm"},
-  {src:"img/m11.jpg", title:"Tên kỉ niệm", text:"Viết vài dòng về khoảnh khắc này.", when:"Ngày · Địa điểm"},
-  {src:"img/m12.jpg", title:"Tên kỉ niệm", text:"Viết vài dòng về khoảnh khắc này.", when:"Ngày · Địa điểm"},
-  {src:"img/m13.jpg", title:"Tên kỉ niệm", text:"Viết vài dòng về khoảnh khắc này.", when:"Ngày · Địa điểm"},
-  {src:"img/v2.mp4", poster:"img/v2.jpg", video:true, title:"Tên kỉ niệm", text:"Viết vài dòng về khoảnh khắc này.", when:"Ngày · Địa điểm"},
-  {src:"img/m14.jpg", title:"Tên kỉ niệm", text:"Viết vài dòng về khoảnh khắc này.", when:"Ngày · Địa điểm"},
-  {src:"img/m15.jpg", title:"Tên kỉ niệm", text:"Viết vài dòng về khoảnh khắc này.", when:"Ngày · Địa điểm"},
-  {src:"img/m16.jpg", title:"Tên kỉ niệm", text:"Viết vài dòng về khoảnh khắc này.", when:"Ngày · Địa điểm"},
-  {src:"img/m17.jpg", title:"Tên kỉ niệm", text:"Viết vài dòng về khoảnh khắc này.", when:"Ngày · Địa điểm"},
-  {src:"img/m18.jpg", title:"Tên kỉ niệm", text:"Viết vài dòng về khoảnh khắc này.", when:"Ngày · Địa điểm"},
+  {src:"img/m01.jpg", title:"Ngày hẹn hò đầu tiên", text:"Hôm ấy Thuỳ nhận lời anh. Một bó hoa nhỏ, một nụ cười thật xinh, và câu chuyện của hai đứa bắt đầu từ đây.", when:"20.10.2024"},
+  {src:"img/m02.jpg", title:"Những chuyến đưa đón", text:"Đón em đi học, đưa em đi dạy, rồi chở em đi ăn đêm sau mỗi buổi. Con đường quen thuộc ấy là quãng đường anh thương nhất.", when:"Mỗi tối sau giờ học, giờ dạy"},
+  {src:"img/v1.mp4", poster:"img/v1.jpg", video:true, title:"Hậu trường photobooth", text:"Đội mũ thỏ, chỉnh tóc, cười nghiêng ngả trước ống kính. Vài giây trước khi có dải ảnh chung của hai đứa.", when:"Photobooth"},
+  {src:"img/m03.jpg", title:"Dải ảnh photobooth", text:"Bốn kiểu ảnh, một trái tim vẽ tay và dòng chữ I love you. Tờ ảnh nhỏ mà giữ được cả một ngày vui.", when:"Photobooth"},
+  {src:"img/m04.jpg", title:"Giáng sinh đến sớm", text:"Chưa tới Noel mà hai đứa đã rủ nhau đi ăn mừng trước, vì ở bên em ngày nào cũng giống ngày lễ.", when:"Mùa Giáng sinh"},
+  {src:"img/m05.jpg", title:"No căng bụng", text:"Ăn xong no tròn mà vẫn không quên giơ tay chữ V. Vẫn là tối Giáng sinh sớm ấy.", when:"Mùa Giáng sinh"},
+  {src:"img/m06.jpg", title:"Nướng ngày đông", text:"Trời lạnh cóng, hai đứa ngồi sát bên bếp nướng. Ấm nhất vẫn là có vợ ngồi cạnh.", when:"Mùa đông"},
+  {src:"img/m07.jpg", title:"Vợ đón Giáng sinh", text:"Khăn len hồng, má hồng, và nụ cười làm anh quên cả trời rét.", when:"Giáng sinh"},
+  {src:"img/m08.jpg", title:"Hẹn hò mùa đông", text:"Áo ấm, ánh đèn vàng, và cô gái của anh ngồi đó, bình yên đến lạ.", when:"Mùa đông"},
+  {src:"img/m09.jpg", title:"Đưa vợ đi du xuân", text:"Lên đồ, lên xe, đưa vk đi chơi xuân. Mùa xuân đầu tiên có em bên cạnh.", when:"Mùa xuân"},
+  {src:"img/m10.jpg", title:"Đấm vợ (nhẹ thôi)", text:"Lại một buổi đi ăn nướng. Ai bảo không nghe lời anh, tạo dáng dằn mặt một chút cho vui.", when:"Đi ăn nướng"},
+  {src:"img/m11.jpg", title:"Hẹn hò cà phê", text:"Một góc quán nhỏ, em diện váy đen, anh nheo mắt làm trò. Buổi chiều hôm ấy trôi thật chậm.", when:"Quán cà phê"},
+  {src:"img/m12.jpg", title:"Khi vợ chán đời", text:"Vẫn buổi cà phê ấy, vợ quay sang tự chụp với gương mặt chán đời. Chán đời mà vẫn xinh.", when:"Quán cà phê"},
+  {src:"img/m13.jpg", title:"Deadline hành xong", text:"Chạy xong deadline, vợ ngủ một giấc thật đã. Tóc rối, mắt nhắm mắt mở, đúng là cô vợ mê ngủ của anh.", when:"Vừa ngủ dậy"},
+  {src:"img/m14.jpg", title:"Vợ điêuuu", text:"Ánh mắt lườm này anh thuộc lòng rồi. Điêu thế mà anh vẫn thương.", when:""},
+  {src:"img/m15.jpg", title:"Hunnnn", text:"Tạo dáng nhí nhố, chẳng cần lý do gì cả.", when:""},
+  {src:"img/v2.mp4", poster:"img/v2.jpg", video:true, title:"Vợ lại hăm ănnn", text:"Món vừa lên là mắt sáng rỡ. Nhìn vợ ăn ngon là anh vui rồi.", when:"Buổi đi ăn"},
+  {src:"img/m16.jpg", title:"Vẫn là buổi ăn ấy", text:"Vợ vừa ăn vừa lướt điện thoại, còn anh thì lén chụp lại.", when:"Buổi đi ăn"},
+  {src:"img/m18.jpg", title:"Nàng thơ của anh", text:"Một chiều nắng nhẹ, em tự chụp mà vẫn xinh như thế.", when:""},
+  {src:"img/m17.jpg", title:"Ngày vợ trưởng thành", text:"Áo cử nhân, bó hoa hồng và anh đứng cạnh. Anh tự hào về em lắm.", when:"Ngày tốt nghiệp"},
 ];
 const PHOTO_MS = 6000;
 const EVENT = new Date("2026-10-20T19:00:00+07:00");
@@ -175,7 +177,7 @@ MEMORIES.forEach((m, i) => {
         <span class="num">${n}</span>
         <h2>${esc(m.title)}</h2>
         <p>${esc(m.text)}</p>
-        <span class="when">${esc(m.when)}</span>
+        ${m.when ? `<span class="when">${esc(m.when)}</span>` : ""}
         ${m.video ? '<span class="soundhint">Chạm vào video để bật tiếng</span>' : ""}
       </div>
     </section>`);
@@ -188,7 +190,7 @@ stage.insertAdjacentHTML("beforeend", `
     <p class="lede">Cảm ơn vì đã luôn ở đây, qua những ngày vui và cả những ngày chẳng dễ dàng. Cùng nhìn lại 730 ngày đã qua và hẹn thêm thật nhiều năm nữa nhé.</p>
     <dl class="facts">
       <dt>Thời gian</dt><dd>19:00, Thứ Ba 20.10.2026</dd>
-      <dt>Địa điểm</dt><dd>Một nơi bí mật, sẽ bật mí khi gặp</dd>
+      <dt>Địa điểm</dt><dd>Del Posto Pizzeria<br>29 Nguyễn Cảnh Toàn, P. Thành Vinh, Nghệ An<br><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=Del+Posto+Pizzeria+29+Nguy%E1%BB%85n+C%E1%BA%A3nh+To%C3%A0n+Vinh" target="_blank" rel="noopener">Xem trên Google Maps ›</a></dd>
       <dt>Trang phục</dt><dd>Thật xinh là được</dd>
     </dl>
     <div class="clock" aria-label="Thời gian còn lại đến buổi hẹn">
@@ -196,8 +198,8 @@ stage.insertAdjacentHTML("beforeend", `
       <div><b id="cd-m">--</b><span>phút</span></div><div><b id="cd-s">--</b><span>giây</span></div>
     </div>
     <button class="btn" id="rsvp" type="button">Nhận lời hẹn ♥</button>
-    <p class="thanks" id="thanks" hidden>Đã nhận lời. Hẹn gặp người thương tối 20.10 nhé!</p>
-    <p class="sign">Thương, Na</p>
+    <p class="thanks" id="thanks" hidden>Đã nhận lời. Hẹn gặp vợ tối 20.10 ở Del Posto nhé!</p>
+    <p class="sign">Thương vợ, Na</p>
   </div>
     <img class="hero" src="img/core.jpg" alt="Hai đứa mình">
   </section>`);
