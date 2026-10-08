@@ -29,17 +29,9 @@ html,body{height:100%}
 body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--body);overflow:hidden;-webkit-tap-highlight-color:transparent}
 
 .bg{position:fixed;inset:0;z-index:0;background:var(--ink)}
-.bg div{position:absolute;inset:0;transition:opacity .9s ease}
-.bg .blur{background:url(img/core-blur.jpg) center/cover no-repeat;transform:scale(1.08);filter:brightness(.42)}
-.bg .sharp{z-index:1;background:url(img/core.jpg) right center/contain no-repeat}
-.bg::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(90deg,rgba(12,14,11,.85) 0%,rgba(12,14,11,.55) 38%,rgba(12,14,11,0) 62%)}
-body.in-memories .bg .sharp{opacity:0}
-body.in-memories .bg::after{background:rgba(12,14,11,.3)}
-@media (max-width:700px){
-  .bg .sharp{background-position:center top}
-  .bg::after{background:linear-gradient(180deg,rgba(12,14,11,0) 0%,rgba(12,14,11,0) 30%,rgba(12,14,11,.8) 52%,rgba(12,14,11,.95) 100%)}
-  .slide.cover{justify-content:flex-end;padding-bottom:8px}
-}
+.bg div{position:absolute;inset:0}
+.bg .blur{background:url(img/core-blur.jpg) center/cover no-repeat;transform:scale(1.08);filter:brightness(.4)}
+.bg .sharp{display:none}
 
 .app{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;padding-inline:16px;padding-block:calc(env(safe-area-inset-top,0px) + 14px) calc(env(safe-area-inset-bottom,0px) + 14px)}
 .bars{display:flex;gap:4px;max-width:1100px;width:100%;margin-inline:auto}
@@ -56,7 +48,9 @@ body.in-memories .bg::after{background:rgba(12,14,11,.3)}
 .slide.on{opacity:1;visibility:visible}
 
 /* intro + invite */
-.cover{flex-direction:column;align-items:flex-start;justify-content:center;gap:14px;max-width:560px}
+.cover{justify-content:space-between;gap:clamp(20px,5vw,56px);overflow-y:auto}
+.cover-text{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:14px;max-width:540px;min-width:0}
+.hero{flex:0 0 auto;width:min(44vw,70vh,560px);max-width:100%;aspect-ratio:1/1;object-fit:contain;background:var(--ink);border:8px solid var(--paper);border-radius:3px;box-shadow:0 30px 60px -18px rgba(0,0,0,.75)}
 .to{font-family:var(--script);font-size:clamp(30px,6vw,44px);color:var(--gold);margin:0;line-height:1.1}
 h1{font-family:var(--display);font-weight:600;font-size:clamp(42px,8.5vw,84px);line-height:1.02;margin:0;text-wrap:balance}
 h1 em{font-weight:500;color:var(--leaf)}
@@ -102,6 +96,10 @@ h1 em{font-weight:500;color:var(--leaf)}
   .mem .cap,.mem.flip .cap{text-align:center;align-items:center;margin:0}
   .frame img,.frame video{max-height:52vh;max-width:calc(100vw - 52px)}
   .cap .num{display:none}
+  .cover{flex-direction:column-reverse;justify-content:flex-end;align-items:center;gap:16px}
+  .hero{width:min(100%,36vh);border-width:6px}
+  .cover[data-kind="invite"] .hero{display:none}
+  .cover[data-kind="invite"]{justify-content:center}
   .cap h2{font-size:22px}
   .cap p{font-size:14px}
   .clock div{min-width:54px}
@@ -117,11 +115,14 @@ h1 em{font-weight:500;color:var(--leaf)}
   <div class="top"><span>Hai năm bên nhau</span><span class="count" id="count"></span></div>
   <div class="stage" id="stage">
     <section class="slide cover" data-kind="cover">
+      <div class="cover-text">
       <p class="to">Gửi người thương,</p>
       <h1>Hai năm <em>mình nắm tay nhau</em></h1>
       <div class="dates"><span>20.10.2024</span><span class="heart">♥</span><span>20.10.2026</span></div>
       <p class="lede">730 ngày đã qua, bấm xem lại từng kỉ niệm của chúng mình trước khi tới lời hẹn cuối cùng.</p>
       <button class="btn" id="start" type="button">Xem kỉ niệm</button>
+      </div>
+      <img class="hero" src="img/core.jpg" alt="Hai đứa mình">
     </section>
   </div>
   <div class="nav">
@@ -181,6 +182,7 @@ MEMORIES.forEach((m, i) => {
 });
 stage.insertAdjacentHTML("beforeend", `
   <section class="slide cover" data-kind="invite">
+    <div class="cover-text">
     <p class="to">Và bây giờ là lời hẹn,</p>
     <h1>Tối hôm ấy, <em>dành trọn cho nhau</em></h1>
     <p class="lede">Cảm ơn vì đã luôn ở đây, qua những ngày vui và cả những ngày chẳng dễ dàng. Cùng nhìn lại 730 ngày đã qua và hẹn thêm thật nhiều năm nữa nhé.</p>
@@ -196,6 +198,8 @@ stage.insertAdjacentHTML("beforeend", `
     <button class="btn" id="rsvp" type="button">Nhận lời hẹn ♥</button>
     <p class="thanks" id="thanks" hidden>Đã nhận lời. Hẹn gặp người thương tối 20.10 nhé!</p>
     <p class="sign">Thương, Na</p>
+  </div>
+    <img class="hero" src="img/core.jpg" alt="Hai đứa mình">
   </section>`);
 
 const slides = [...stage.querySelectorAll(".slide")];
